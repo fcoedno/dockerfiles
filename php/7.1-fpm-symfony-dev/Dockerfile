@@ -1,4 +1,4 @@
-FROM fcoedno/php:latest
+FROM fcoedno/php:7.1-fpm
 RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" \
     && php composer-setup.php \
     && php -r "unlink('composer-setup.php');" \
