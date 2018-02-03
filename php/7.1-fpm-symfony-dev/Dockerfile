@@ -10,6 +10,10 @@ RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" \
     && echo "xdebug.remote_autostart=on" >> /usr/local/etc/php/conf.d/xdebug.ini \
     && echo "xdebug.remote_connect_back=on" >> /usr/local/etc/php/conf.d/xdebug.ini \
     && echo "date.timezone=${PHP_TIMEZONE:-UTC}" > "$PHP_INI_DIR/conf.d/date_timezone.ini"
+RUN apk update --no-cache \
+    && apk add icu-dev --no-cache \
+    && docker-php-ext-install intl
+RUN mkdir /.composer && chmod 777 -R /.composer
 ENV PHP_EXTRA_CONFIGURE_ARGS="--enable-fpm --with-fpm-user=user --with-fpm-group=user"
 COPY entrypoint.sh /usr/local/bin/entrypoint.sh
 ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
