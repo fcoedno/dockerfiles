@@ -12,5 +12,6 @@ RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" \
     && echo "date.timezone=${PHP_TIMEZONE:-UTC}" > "$PHP_INI_DIR/conf.d/date_timezone.ini"
 RUN apk update --no-cache \
     && apk add icu-dev --no-cache \
-    && docker-php-ext-install intl
+    && docker-php-ext-install intl \
+    && docker-php-ext-install gd
 RUN mkdir /root/composer && chmod 777 -R /root/composer
