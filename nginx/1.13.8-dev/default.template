@@ -5,7 +5,7 @@ server {
     root $NGINX_ROOT;
     index index.php;
 
-    server_name NGINX_HOST;
+    server_name $NGINX_HOST;
 
     location / {
         try_files $uri $uri/ /index.php?$query_string;
